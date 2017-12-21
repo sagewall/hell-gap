@@ -8,12 +8,13 @@ import * as THREE from 'three';
 })
 export class SceneComponent implements AfterViewInit {
 
-  private camera: THREE.PerspectiveCamera;
   private scene: THREE.Scene;
+  private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
-  private geometry: THREE.BoxGeometry;
-  private material: THREE.MeshNormalMaterial;
-  private mesh: THREE.Mesh;
+  private geometry: THREE.Geometry;
+  private vertices: THREE.Vector3[];
+  private points: THREE.Points;
+  private pointsMaterial: THREE.PointsMaterial;
 
   @ViewChild('canvas')
   private canvasRef: ElementRef;
@@ -22,31 +23,39 @@ export class SceneComponent implements AfterViewInit {
     return this.canvasRef.nativeElement;
   }
 
-  private renderCube() {
-
-    this.camera = new THREE.PerspectiveCamera(70, this.canvas.width / this.canvas.height, 0.01, 10);
-    this.camera.position.z = 1;
+  private renderPoints() {
 
     this.scene = new THREE.Scene();
+    this.geometry = new THREE.Geometry();
 
-    this.geometry = new THREE.BoxGeometry(0.4, 0.4, 0.4);
+    this.camera = new THREE.PerspectiveCamera(60, this.canvas.width / this.canvas.height, 1, 1000);
+    this.camera.position.z = 25;
+    this.camera.position.x = 0;
+    this.camera.position.y = 0;
+    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-    this.material = new THREE.MeshNormalMaterial();
+    this.vertices = [];
+    this.vertices.push(new THREE.Vector3(1, 1, 1));
+    this.vertices.push(new THREE.Vector3(2, 2, 1));
+    this.vertices.push(new THREE.Vector3(3, 4, 1));
 
-    this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.rotation.x = 0.50;
-    this.mesh.rotation.y = 0.50;
-    this.mesh.rotation.y = 0.50;
-    this.scene.add(this.mesh);
+    for (const vertex of this.vertices) {
+      this.geometry.vertices.push(vertex);
+    }
+
+    this.pointsMaterial = new THREE.PointsMaterial();
+
+    this.points = new THREE.Points(this.geometry, this.pointsMaterial);
+    this.scene.add(this.points);
 
     this.renderer = new THREE.WebGLRenderer({
-      canvas: this.canvas,
-      antialias: true
+      canvas: this.canvas
     });
     this.renderer.render(this.scene, this.camera);
+
   }
 
   public ngAfterViewInit() {
-    this.renderCube();
+    this.renderPoints();
   }
 }
