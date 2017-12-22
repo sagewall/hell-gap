@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { ArtifactService } from '../artifact.service';
 import * as THREE from 'three';
 
 @Component({
@@ -11,10 +12,10 @@ export class SceneComponent implements AfterViewInit {
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
-  private geometry: THREE.Geometry;
-  private vertices: THREE.Vector3[];
-  private points: THREE.Points;
-  private pointsMaterial: THREE.PointsMaterial;
+  private chippedStoneGeometry: THREE.Geometry;
+  private chippedStone: THREE.Vector3[];
+  private chippedStonePoints: THREE.Points;
+  private chippedStoneMaterial: THREE.PointsMaterial;
 
   @ViewChild('canvas')
   private canvasRef: ElementRef;
@@ -23,30 +24,26 @@ export class SceneComponent implements AfterViewInit {
     return this.canvasRef.nativeElement;
   }
 
+  constructor(private sceneService: ArtifactService) {}
+
   private renderPoints() {
 
     this.scene = new THREE.Scene();
-    this.geometry = new THREE.Geometry();
+
+    this.chippedStoneGeometry = new THREE.Geometry();
+    this.chippedStone = this.sceneService.getChippedStone();
+    for (const vertex of this.chippedStone) {
+      this.chippedStoneGeometry.vertices.push(vertex);
+    }
+    this.chippedStoneMaterial = new THREE.PointsMaterial({size: 0.1});
+    this.chippedStonePoints = new THREE.Points(this.chippedStoneGeometry, this.chippedStoneMaterial);
+    this.scene.add(this.chippedStonePoints);
 
     this.camera = new THREE.PerspectiveCamera(60, this.canvas.width / this.canvas.height, 1, 1000);
-    this.camera.position.z = 25;
-    this.camera.position.x = 0;
-    this.camera.position.y = 0;
-    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-    this.vertices = [];
-    this.vertices.push(new THREE.Vector3(1, 1, 1));
-    this.vertices.push(new THREE.Vector3(2, 2, 1));
-    this.vertices.push(new THREE.Vector3(3, 4, 1));
-
-    for (const vertex of this.vertices) {
-      this.geometry.vertices.push(vertex);
-    }
-
-    this.pointsMaterial = new THREE.PointsMaterial();
-
-    this.points = new THREE.Points(this.geometry, this.pointsMaterial);
-    this.scene.add(this.points);
+    this.camera.position.x = 1483;
+    this.camera.position.y = 1285;
+    this.camera.position.z = 98;
+    this.camera.lookAt(new THREE.Vector3(1483, 1295, 98));
 
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas

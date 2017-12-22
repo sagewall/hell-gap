@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ArtifactService } from '../artifact.service';
 
 import { SceneComponent } from './scene.component';
 
@@ -8,7 +9,12 @@ describe('SceneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SceneComponent ]
+      declarations: [
+        SceneComponent
+      ],
+      providers: [
+        ArtifactService
+      ],
     })
     .compileComponents();
   }));

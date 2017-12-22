@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import { ArtifactService } from './artifact.service';
 import { AppComponent } from './app.component';
 import { SceneComponent } from './scene/scene.component';
 
@@ -14,7 +14,9 @@ import { SceneComponent } from './scene/scene.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    ArtifactService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

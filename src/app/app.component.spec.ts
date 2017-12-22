@@ -1,6 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { SceneComponent } from './scene/scene.component';
+import { ArtifactService } from './artifact.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -8,6 +9,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         SceneComponent
+      ],
+      providers: [
+        ArtifactService
       ],
     }).compileComponents();
   }));
