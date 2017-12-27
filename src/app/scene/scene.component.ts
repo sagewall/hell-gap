@@ -28,18 +28,14 @@ export class SceneComponent implements AfterViewInit {
     this.render = this.render.bind(this);
   }
 
-  private renderPoints() {
+  public ngAfterViewInit() {
+    this.createScene();
+    this.renderChippedStone();
+    this.addOrbitControls();
+  }
 
+  private createScene() {
     this.scene = new THREE.Scene();
-
-    this.chippedStoneGeometry = new THREE.Geometry();
-    this.chippedStone = this.sceneService.getChippedStone();
-    for (const vertex of this.chippedStone) {
-      this.chippedStoneGeometry.vertices.push(vertex);
-    }
-    this.chippedStoneMaterial = new THREE.PointsMaterial({size: 0.1});
-    this.chippedStonePoints = new THREE.Points(this.chippedStoneGeometry, this.chippedStoneMaterial);
-    this.scene.add(this.chippedStonePoints);
 
     this.camera = new THREE.PerspectiveCamera(60, this.canvas.width / this.canvas.height, 1, 1000);
     this.camera.up.set(0, 0, 1);
@@ -51,13 +47,23 @@ export class SceneComponent implements AfterViewInit {
     this.renderer = new THREE.WebGLRenderer({
       canvas: this.canvas
     });
-    this.render();
-
   }
 
-  public ngAfterViewInit() {
-    this.renderPoints();
-    this.addOrbitControls();
+  private renderChippedStone() {
+    this.chippedStoneGeometry = new THREE.Geometry();
+
+    this.chippedStone = this.sceneService.getChippedStone();
+    for (const vertex of this.chippedStone) {
+      this.chippedStoneGeometry.vertices.push(vertex);
+    }
+
+    this.chippedStoneMaterial = new THREE.PointsMaterial({size: 0.1});
+
+    this.chippedStonePoints = new THREE.Points(this.chippedStoneGeometry, this.chippedStoneMaterial);
+
+    this.scene.add(this.chippedStonePoints);
+
+    this.render();
   }
 
   public render() {
