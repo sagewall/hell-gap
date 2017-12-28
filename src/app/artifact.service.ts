@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Vector3 } from 'three';
 import { CHIPPEDSTONE } from './chipped-stone';
+import { BONE } from './bone';
 
 @Injectable()
 export class ArtifactService {
 
   private chippedStone: Vector3[];
+  private bone: Vector3[];
 
   constructor() {
   }
@@ -16,6 +18,14 @@ export class ArtifactService {
       this.chippedStone.push(new Vector3(artifact.x, artifact.y, artifact.z));
     }
     return this.chippedStone;
+  }
+
+  getBone(): Vector3[] {
+    this.bone = [];
+    for (const artifact of BONE) {
+      this.bone.push(new Vector3(artifact.x, artifact.y, artifact.z));
+    }
+    return this.bone;
   }
 
 }

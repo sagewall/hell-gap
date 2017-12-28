@@ -11,10 +11,17 @@ export class SceneComponent implements AfterViewInit {
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
+
   private chippedStoneGeometry: THREE.Geometry;
   private chippedStone: THREE.Vector3[];
   private chippedStonePoints: THREE.Points;
   private chippedStoneMaterial: THREE.PointsMaterial;
+
+  private boneGeometry: THREE.Geometry;
+  private bone: THREE.Vector3[];
+  private bonePoints: THREE.Points;
+  private boneMaterial: THREE.PointsMaterial;
+
   private orbitControls: THREE.OrbitControls;
 
   @ViewChild('canvas')
@@ -31,11 +38,13 @@ export class SceneComponent implements AfterViewInit {
   public ngAfterViewInit() {
     this.createScene();
     this.renderChippedStone();
+    this.renderBone();
     this.addOrbitControls();
   }
 
   private createScene() {
     this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color(0xFAEED8);
 
     this.camera = new THREE.PerspectiveCamera(60, this.canvas.width / this.canvas.height, 1, 1000);
     this.camera.up.set(0, 0, 1);
@@ -57,11 +66,40 @@ export class SceneComponent implements AfterViewInit {
       this.chippedStoneGeometry.vertices.push(vertex);
     }
 
-    this.chippedStoneMaterial = new THREE.PointsMaterial({size: 0.1});
+    this.chippedStoneMaterial = new THREE.PointsMaterial({
+      size: 0.01,
+      color: new THREE.Color(0x6F492C),
+      precision: 'highp',
+      transparent: true,
+      opacity: 0.75
+    });
 
     this.chippedStonePoints = new THREE.Points(this.chippedStoneGeometry, this.chippedStoneMaterial);
 
     this.scene.add(this.chippedStonePoints);
+
+    this.render();
+  }
+
+  private renderBone() {
+    this.boneGeometry = new THREE.Geometry();
+
+    this.bone = this.sceneService.getBone();
+    for (const vertex of this.bone) {
+      this.boneGeometry.vertices.push(vertex);
+    }
+
+    this.boneMaterial = new THREE.PointsMaterial({
+      size: 0.01,
+      color: new THREE.Color(0x222F4A),
+      precision: 'highp',
+      transparent: true,
+      opacity: 0.75
+    });
+
+    this.bonePoints = new THREE.Points(this.boneGeometry, this.boneMaterial);
+
+    this.scene.add(this.bonePoints);
 
     this.render();
   }
