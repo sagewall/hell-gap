@@ -111,7 +111,7 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private addOrbitControls() {
-    this.orbitControls = new THREE.OrbitControls(this.camera);
+    this.orbitControls = new THREE.OrbitControls(this.camera, this.canvas);
     this.orbitControls.target = new THREE.Vector3(1483, 1295, 98);
     this.orbitControls.addEventListener('change', this.render);
   }
