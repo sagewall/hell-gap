@@ -8,6 +8,9 @@ import { ArtifactService } from '../artifact.service';
 })
 export class SceneComponent implements AfterViewInit {
 
+  private chippedStoneVisiblility: boolean;
+  private boneVisiblility: boolean;
+
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
@@ -32,6 +35,8 @@ export class SceneComponent implements AfterViewInit {
   }
 
   constructor(private sceneService: ArtifactService) {
+    this.chippedStoneVisiblility = true;
+    this.boneVisiblility = true;
     this.render = this.render.bind(this);
   }
 
@@ -104,13 +109,33 @@ export class SceneComponent implements AfterViewInit {
     this.render();
   }
 
-  public render() {
+  private render() {
     this.renderer.render(this.scene, this.camera);
   }
 
-  public addOrbitControls() {
+  private addOrbitControls() {
     this.orbitControls = new THREE.OrbitControls(this.camera);
     this.orbitControls.target = new THREE.Vector3(1483, 1295, 98);
     this.orbitControls.addEventListener('change', this.render);
+  }
+
+  public chippedStoneVisibilityChange(event) {
+    this.chippedStoneVisiblility = event.checked;
+
+    this.chippedStonePoints.traverse((child) => {
+      this.chippedStoneVisiblility ? child.visible = true : child.visible = false;
+    });
+
+    this.render();
+  }
+
+  public boneVisibilityChange(event) {
+    this.boneVisiblility = event.checked;
+
+    this.bonePoints.traverse((child) => {
+      this.boneVisiblility ? child.visible = true : child.visible = false;
+    });
+
+    this.render();
   }
 }

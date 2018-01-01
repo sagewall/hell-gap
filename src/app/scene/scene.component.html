@@ -1,1 +1,13 @@
+<div>
+  <mat-slide-toggle
+    [(checked)]="chippedStoneVisiblility"
+    (change)="chippedStoneVisibilityChange($event)">
+    Chipped Stone
+  </mat-slide-toggle>
+  <mat-slide-toggle
+    [(checked)]="boneVisiblility"
+    (change)="boneVisibilityChange($event)">
+    Bone
+  </mat-slide-toggle>
+</div>
 <canvas #canvas></canvas>

@@ -3,6 +3,8 @@ import { ArtifactService } from '../artifact.service';
 
 import { SceneComponent } from './scene.component';
 
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 describe('SceneComponent', () => {
   let component: SceneComponent;
   let fixture: ComponentFixture<SceneComponent>;
@@ -11,6 +13,9 @@ describe('SceneComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         SceneComponent
+      ],
+      imports: [
+        MatSlideToggleModule
       ],
       providers: [
         ArtifactService

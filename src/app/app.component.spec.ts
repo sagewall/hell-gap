@@ -3,12 +3,17 @@ import { AppComponent } from './app.component';
 import { SceneComponent } from './scene/scene.component';
 import { ArtifactService } from './artifact.service';
 
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
         SceneComponent
+      ],
+      imports: [
+        MatSlideToggleModule
       ],
       providers: [
         ArtifactService
