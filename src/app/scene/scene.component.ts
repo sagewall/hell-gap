@@ -42,8 +42,9 @@ export class SceneComponent implements AfterViewInit {
 
   public ngAfterViewInit() {
     this.createScene();
-    this.renderChippedStone();
-    this.renderBone();
+    this.addChippedStone();
+    this.addBone();
+    this.render();
     this.addOrbitControls();
   }
 
@@ -63,7 +64,7 @@ export class SceneComponent implements AfterViewInit {
     });
   }
 
-  private renderChippedStone() {
+  private addChippedStone() {
     this.chippedStoneGeometry = new THREE.Geometry();
 
     this.chippedStone = this.sceneService.getChippedStone();
@@ -82,11 +83,9 @@ export class SceneComponent implements AfterViewInit {
     this.chippedStonePoints = new THREE.Points(this.chippedStoneGeometry, this.chippedStoneMaterial);
 
     this.scene.add(this.chippedStonePoints);
-
-    this.render();
   }
 
-  private renderBone() {
+  private addBone() {
     this.boneGeometry = new THREE.Geometry();
 
     this.bone = this.sceneService.getBone();
@@ -105,8 +104,6 @@ export class SceneComponent implements AfterViewInit {
     this.bonePoints = new THREE.Points(this.boneGeometry, this.boneMaterial);
 
     this.scene.add(this.bonePoints);
-
-    this.render();
   }
 
   private render() {
