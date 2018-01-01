@@ -8,8 +8,8 @@ import { ArtifactService } from '../artifact.service';
 })
 export class SceneComponent implements AfterViewInit {
 
-  private chippedStoneVisiblility: boolean;
-  private boneVisiblility: boolean;
+  public chippedStoneVisiblility: boolean;
+  public boneVisiblility: boolean;
 
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
