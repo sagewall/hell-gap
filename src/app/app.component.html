@@ -2,9 +2,13 @@
   <header class="box header">
     <h1>{{ title }}</h1>
   </header>
-  <aside class="box sidebar">Sidebar</aside>
+  <aside class="box sidebar">
+    <mat-nav-list>
+      <a routerLink="/scene" routerLinkActive="active">Scene</a>
+    </mat-nav-list>
+  </aside>
   <div class="box content">
-    <app-scene></app-scene>
+    <router-outlet></router-outlet>
   </div>
   <footer class="box footer">Footer</footer>
 </div>

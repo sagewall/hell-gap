@@ -1,9 +1,15 @@
 import { TestBed, async } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { APP_BASE_HREF } from '@angular/common';
+import { RoutingModule } from './routing/routing.module';
+
 import { AppComponent } from './app.component';
 import { SceneComponent } from './scene/scene.component';
 import { ArtifactService } from './artifact.service';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatListModule } from '@angular/material/list';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,10 +19,15 @@ describe('AppComponent', () => {
         SceneComponent
       ],
       imports: [
-        MatSlideToggleModule
+        RouterModule,
+        RouterTestingModule,
+        RoutingModule,
+        MatSlideToggleModule,
+        MatListModule
       ],
       providers: [
-        ArtifactService
+        ArtifactService,
+        {provide: APP_BASE_HREF, useValue : '/' }
       ],
     }).compileComponents();
   }));
@@ -25,7 +36,7 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'app'`, async(() => {
+  it(`should have as title 'Hell Gap'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('Hell Gap');
