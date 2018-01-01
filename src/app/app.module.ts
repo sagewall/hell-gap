@@ -9,13 +9,15 @@ import { MatListModule } from '@angular/material/list';
 
 import { ArtifactService } from './artifact.service';
 import { AppComponent } from './app.component';
+import { InformationComponent } from './information/information.component';
 import { SceneComponent } from './scene/scene.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SceneComponent
+    SceneComponent,
+    InformationComponent
   ],
   imports: [
     BrowserModule,

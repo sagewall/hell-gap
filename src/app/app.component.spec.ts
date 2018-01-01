@@ -5,6 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { RoutingModule } from './routing/routing.module';
 
 import { AppComponent } from './app.component';
+import { InformationComponent } from './information/information.component';
 import { SceneComponent } from './scene/scene.component';
 import { ArtifactService } from './artifact.service';
 
@@ -16,7 +17,8 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        SceneComponent
+        SceneComponent,
+        InformationComponent
       ],
       imports: [
         RouterModule,
