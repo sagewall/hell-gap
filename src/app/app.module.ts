@@ -8,6 +8,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatListModule } from '@angular/material/list';
 
 import { ArtifactService } from './artifact.service';
+import { GridService } from './grid.service';
 import { AppComponent } from './app.component';
 import { InformationComponent } from './information/information.component';
 import { SceneComponent } from './scene/scene.component';
@@ -28,7 +29,8 @@ import { SceneComponent } from './scene/scene.component';
     MatListModule
   ],
   providers: [
-    ArtifactService
+    ArtifactService,
+    GridService
   ],
   bootstrap: [AppComponent]
 })

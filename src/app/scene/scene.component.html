@@ -9,5 +9,10 @@
     (change)="boneVisibilityChange($event)">
     Bone
   </mat-slide-toggle>
+  <mat-slide-toggle
+    [checked]="gridVisibility"
+    (change)="gridVisibilityChange($event)">
+    Grid Lines
+  </mat-slide-toggle>
 </div>
 <canvas #canvas></canvas>

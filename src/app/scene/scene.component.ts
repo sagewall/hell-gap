@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ArtifactService } from '../artifact.service';
+import { GridService } from '../grid.service';
 
 @Component({
   selector: 'app-scene',
@@ -10,6 +11,7 @@ export class SceneComponent implements AfterViewInit {
 
   public chippedStoneVisibility: boolean;
   public boneVisibility: boolean;
+  public gridVisibility: boolean;
 
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
@@ -25,6 +27,8 @@ export class SceneComponent implements AfterViewInit {
   private bonePoints: THREE.Points;
   private boneMaterial: THREE.PointsMaterial;
 
+  private gridLines: THREE.Line[];
+
   private orbitControls: THREE.OrbitControls;
 
   @ViewChild('canvas')
@@ -34,9 +38,13 @@ export class SceneComponent implements AfterViewInit {
     return this.canvasRef.nativeElement;
   }
 
-  constructor(private sceneService: ArtifactService) {
+  constructor(
+    private sceneService: ArtifactService,
+    private gridService: GridService
+  ) {
     this.chippedStoneVisibility = true;
     this.boneVisibility = true;
+    this.gridVisibility = false;
     this.render = this.render.bind(this);
   }
 
@@ -44,6 +52,7 @@ export class SceneComponent implements AfterViewInit {
     this.createScene();
     this.addChippedStone();
     this.addBone();
+    this.addGrid();
     this.render();
     this.addOrbitControls();
   }
@@ -106,6 +115,16 @@ export class SceneComponent implements AfterViewInit {
     this.scene.add(this.bonePoints);
   }
 
+  private addGrid() {
+    this.gridLines = this.gridService.getLines();
+    for (const gridLine of this.gridLines) {
+      this.scene.add(gridLine);
+      gridLine.traverse((child) => {
+        this.gridVisibility ? child.visible = true : child.visible = false;
+      });
+    }
+  }
+
   private render() {
     this.renderer.render(this.scene, this.camera);
   }
@@ -132,6 +151,18 @@ export class SceneComponent implements AfterViewInit {
     this.bonePoints.traverse((child) => {
       this.boneVisibility ? child.visible = true : child.visible = false;
     });
+
+    this.render();
+  }
+
+  public gridVisibilityChange(event) {
+    this.gridVisibility = event.checked;
+
+    for (const gridLine of this.gridLines) {
+      gridLine.traverse((child) => {
+        this.gridVisibility ? child.visible = true : child.visible = false;
+      });
+    }
 
     this.render();
   }

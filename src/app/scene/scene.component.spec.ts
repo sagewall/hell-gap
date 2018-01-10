@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ArtifactService } from '../artifact.service';
+import { GridService } from '../grid.service';
 
 import { SceneComponent } from './scene.component';
 
@@ -18,7 +19,8 @@ describe('SceneComponent', () => {
         MatSlideToggleModule
       ],
       providers: [
-        ArtifactService
+        ArtifactService,
+        GridService
       ],
     })
     .compileComponents();
