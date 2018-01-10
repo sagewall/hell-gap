@@ -11,6 +11,7 @@ export class SceneComponent implements AfterViewInit {
 
   public chippedStoneVisibility: boolean;
   public boneVisibility: boolean;
+  public ochreVisibility: boolean;
   public gridVisibility: boolean;
 
   private scene: THREE.Scene;
@@ -26,6 +27,11 @@ export class SceneComponent implements AfterViewInit {
   private bone: THREE.Vector3[];
   private bonePoints: THREE.Points;
   private boneMaterial: THREE.PointsMaterial;
+
+  private ochreGeometry: THREE.Geometry;
+  private ochre: THREE.Vector3[];
+  private ochrePoints: THREE.Points;
+  private ochreMaterial: THREE.PointsMaterial;
 
   private gridLines: THREE.Line[];
 
@@ -44,6 +50,7 @@ export class SceneComponent implements AfterViewInit {
   ) {
     this.chippedStoneVisibility = true;
     this.boneVisibility = true;
+    this.ochreVisibility = true;
     this.gridVisibility = false;
     this.render = this.render.bind(this);
   }
@@ -52,6 +59,7 @@ export class SceneComponent implements AfterViewInit {
     this.createScene();
     this.addChippedStone();
     this.addBone();
+    this.addOchre();
     this.addGrid();
     this.render();
     this.addOrbitControls();
@@ -115,6 +123,27 @@ export class SceneComponent implements AfterViewInit {
     this.scene.add(this.bonePoints);
   }
 
+  private addOchre() {
+    this.ochreGeometry = new THREE.Geometry();
+
+    this.ochre = this.sceneService.getOchre();
+    for (const vertex of this.ochre) {
+      this.ochreGeometry.vertices.push(vertex);
+    }
+
+    this.ochreMaterial = new THREE.PointsMaterial({
+      size: 0.01,
+      color: new THREE.Color(0xff0000),
+      precision: 'highp',
+      transparent: true,
+      opacity: 0.75
+    });
+
+    this.ochrePoints = new THREE.Points(this.ochreGeometry, this.ochreMaterial);
+
+    this.scene.add(this.ochrePoints);
+  }
+
   private addGrid() {
     this.gridLines = this.gridService.getLines();
     for (const gridLine of this.gridLines) {
@@ -150,6 +179,16 @@ export class SceneComponent implements AfterViewInit {
 
     this.bonePoints.traverse((child) => {
       this.boneVisibility ? child.visible = true : child.visible = false;
+    });
+
+    this.render();
+  }
+
+  public ochreVisibilityChange(event) {
+    this.ochreVisibility = event.checked;
+
+    this.ochrePoints.traverse((child) => {
+      this.ochreVisibility ? child.visible = true : child.visible = false;
     });
 
     this.render();

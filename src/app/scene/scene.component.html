@@ -10,6 +10,11 @@
     Bone
   </mat-slide-toggle>
   <mat-slide-toggle
+    [checked]="ochreVisibility"
+    (change)="ochreVisibilityChange($event)">
+    Ochre
+  </mat-slide-toggle>
+  <mat-slide-toggle
     [checked]="gridVisibility"
     (change)="gridVisibilityChange($event)">
     Grid Lines
