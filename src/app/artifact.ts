@@ -1,5 +1,6 @@
 export class Artifact {
-  type: string;
+  class: string;
+  genus: string;
   x: number;
   y: number;
   z: number;
