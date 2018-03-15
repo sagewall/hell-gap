@@ -66,7 +66,9 @@ export class GridService {
 
   getLines(): THREE.Line[] {
     const gridMaterial = new THREE.LineBasicMaterial({
-      color: 0x999999
+      color: 0x404040,
+      transparent: true,
+      opacity: 0.4
     });
 
     for (const gridLine of this.gridLines) {

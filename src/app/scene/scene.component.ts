@@ -67,7 +67,7 @@ export class SceneComponent implements AfterViewInit {
 
   private createScene() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xFAEED8);
+    this.scene.background = new THREE.Color(0x111111);
 
     this.camera = new THREE.PerspectiveCamera(60, this.canvas.width / this.canvas.height, 1, 1000);
     this.camera.up.set(0, 0, 1);
@@ -91,7 +91,7 @@ export class SceneComponent implements AfterViewInit {
 
     this.chippedStoneMaterial = new THREE.PointsMaterial({
       size: 0.01,
-      color: new THREE.Color(0x6F492C),
+      color: new THREE.Color(0xBF916E),
       precision: 'highp',
       transparent: true,
       opacity: 0.75
@@ -112,7 +112,7 @@ export class SceneComponent implements AfterViewInit {
 
     this.boneMaterial = new THREE.PointsMaterial({
       size: 0.01,
-      color: new THREE.Color(0x222F4A),
+      color: new THREE.Color(0xFFFFFF),
       precision: 'highp',
       transparent: true,
       opacity: 0.75
@@ -133,7 +133,7 @@ export class SceneComponent implements AfterViewInit {
 
     this.ochreMaterial = new THREE.PointsMaterial({
       size: 0.01,
-      color: new THREE.Color(0xff0000),
+      color: new THREE.Color(0xFF0000),
       precision: 'highp',
       transparent: true,
       opacity: 0.75
