@@ -1,16 +1,14 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { TestBed, async } from '@angular/core/testing';
+import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { APP_BASE_HREF } from '@angular/common';
-import { RoutingModule } from './routing/routing.module';
-
 import { AppComponent } from './app.component';
-import { InformationComponent } from './information/information.component';
-import { SceneComponent } from './scene/scene.component';
 import { ArtifactService } from './artifact.service';
-
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatListModule } from '@angular/material/list';
+import { InformationComponent } from './information/information.component';
+import { RoutingModule } from './routing/routing.module';
+import { SceneComponent } from './scene/scene.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -29,7 +27,7 @@ describe('AppComponent', () => {
       ],
       providers: [
         ArtifactService,
-        {provide: APP_BASE_HREF, useValue : '/' }
+        { provide: APP_BASE_HREF, useValue: '/' }
       ],
     }).compileComponents();
   }));

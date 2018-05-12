@@ -1,6 +1,10 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import * as THREE from 'three';
 import { ArtifactService } from '../artifact.service';
 import { GridService } from '../grid.service';
+
+declare const require: (moduleId: string) => any;
+const OrbitControls = require('three-orbit-controls')(THREE);
 
 @Component({
   selector: 'app-scene',
@@ -159,7 +163,7 @@ export class SceneComponent implements AfterViewInit {
   }
 
   private addOrbitControls() {
-    this.orbitControls = new THREE.OrbitControls(this.camera, this.canvas);
+    this.orbitControls = new OrbitControls(this.camera, this.canvas);
     this.orbitControls.target = new THREE.Vector3(1483, 1295, 98);
     this.orbitControls.addEventListener('change', this.render);
   }

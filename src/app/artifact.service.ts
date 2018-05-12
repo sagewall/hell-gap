@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Vector3 } from 'three';
-import { CHIPPEDSTONE } from './chipped-stone';
 import { BONE } from './bone';
+import { CHIPPEDSTONE } from './chipped-stone';
 import { OCHRE } from './ochre';
 
 @Injectable()

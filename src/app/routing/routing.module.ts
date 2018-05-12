@@ -4,9 +4,9 @@ import { InformationComponent } from '../information/information.component';
 import { SceneComponent } from '../scene/scene.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/information', pathMatch: 'full'},
-  {path: 'information', component: InformationComponent},
-  {path: 'scene', component: SceneComponent}
+  { path: '', redirectTo: '/information', pathMatch: 'full' },
+  { path: 'information', component: InformationComponent },
+  { path: 'scene', component: SceneComponent }
 ];
 
 @NgModule({

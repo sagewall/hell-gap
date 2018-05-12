@@ -1,10 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ArtifactService } from '../artifact.service';
 import { GridService } from '../grid.service';
-
 import { SceneComponent } from './scene.component';
-
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 describe('SceneComponent', () => {
   let component: SceneComponent;
@@ -23,7 +21,7 @@ describe('SceneComponent', () => {
         GridService
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

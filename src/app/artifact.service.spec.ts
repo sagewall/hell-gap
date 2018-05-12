@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { ArtifactService } from './artifact.service';
 
 describe('ArtifactService', () => {

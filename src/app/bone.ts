@@ -1,4 +1,4 @@
-import {Artifact} from './artifact';
+import { Artifact } from './artifact';
 
 export const BONE: Artifact[] = [
   {

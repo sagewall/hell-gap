@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import * as THREE from 'three';
 import { GridLine } from './grid-line';
-
 
 @Injectable()
 export class GridService {
